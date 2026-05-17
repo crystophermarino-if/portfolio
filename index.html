@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystopher Marino | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #ea1d2c;
+            --accent-glow: rgba(234, 29, 44, 0.3);
+            --accent-soft: rgba(234, 29, 44, 0.1);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --orange: #f97316;
+            --cyan: #06b6d4;
+            --yellow: #eab308;
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-orb.red { width: 500px; height: 500px; background: rgba(234,29,44,0.06); top: -100px; right: -100px; }
+        .glow-orb.blue { width: 400px; height: 400px; background: rgba(59,130,246,0.04); bottom: 20%; left: -100px; }
+        .glow-orb.purple { width: 350px; height: 350px; background: rgba(168,85,247,0.04); top: 50%; right: -50px; }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,15,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(10,10,15,0.95);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--text-muted); font-weight: 400; }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-secondary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== SECTIONS ===== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 2rem;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-header { margin-bottom: 3.5rem; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 64px;
+        }
+
+        .hero-content { max-width: 720px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(234,29,44,0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 560px;
+        }
+
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: var(--font-sans);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-hover);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .about-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .info-row:last-child { border: none; }
+        .info-label { color: var(--text-muted); }
+        .info-value { color: var(--text-primary); font-weight: 500; }
+
+        /* ===== RECOGNITION BADGE ===== */
+        .recognition-banner {
+            background: linear-gradient(135deg, rgba(234,29,44,0.08), rgba(168,85,247,0.08));
+            border: 1px solid rgba(234,29,44,0.15);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .recognition-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .recognition-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .recognition-text strong {
+            color: var(--text-primary);
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--skill-color, var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+        }
+
+        .skill-card:hover::before { opacity: 1; }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            background: var(--skill-bg, var(--accent-soft));
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--project-color, var(--accent));
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+            background: var(--bg-card-hover);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-rank {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--project-color, var(--accent));
+            background: rgba(234,29,44,0.08);
+            padding: 4px 10px;
+            border-radius: 100px;
+            white-space: nowrap;
+            border: 1px solid rgba(234,29,44,0.15);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .project-impact {
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .impact-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .impact-value {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--project-color, var(--accent));
+        }
+
+        .impact-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border-hover);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            border-color: var(--project-color, var(--accent));
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .project-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ===== AGENTS SECTION ===== */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .agent-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .agent-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .agent-badge {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .agent-badge.public {
+            background: rgba(34,197,94,0.1);
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+
+        .agent-badge.personal {
+            background: rgba(59,130,246,0.1);
+            color: var(--blue);
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+
+        .agent-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .agent-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .agent-feature {
+            font-size: 0.68rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .agent-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--purple);
+            transition: color 0.3s;
+        }
+
+        .agent-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* ===== DASHBOARDS ===== */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .dash-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .dash-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            background: var(--bg-card-hover);
+        }
+
+        .dash-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .dash-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--purple), var(--blue), var(--green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent);
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(2) .timeline-dot { border-color: var(--purple); }
+        .timeline-item:nth-child(3) .timeline-dot { border-color: var(--blue); }
+        .timeline-item:nth-child(4) .timeline-dot { border-color: var(--green); }
+        .timeline-item:nth-child(5) .timeline-dot { border-color: var(--orange); }
+        .timeline-item:nth-child(6) .timeline-dot { border-color: var(--cyan); }
+        .timeline-item:nth-child(7) .timeline-dot { border-color: var(--yellow); }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section { text-align: center; }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(234,29,44,0.1);
+        }
+
+        .contact-link svg { width: 18px; height: 18px; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        footer span { color: var(--accent); }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section { padding: 4rem 1.2rem; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(10,10,15,0.98);
+                padding: 1.5rem 2rem;
+                gap: 1.2rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .agents-grid { grid-template-columns: 1fr; }
+            .dash-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.7rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .project-top { flex-direction: column-reverse; gap: 0.5rem; }
+            .project-impact { gap: 1.2rem; }
+            .about-stats { grid-template-columns: 1fr 1fr; }
+            .recognition-banner { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .skills-grid { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb red"></div>
+    <div class="glow-orb blue"></div>
+    <div class="glow-orb purple"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-logo">&lt;CM /&gt; <span>portfolio</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">Sobre</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projetos</a></li>
+            <li><a href="#agents" onclick="closeMenu()">AI Agents</a></li>
+            <li><a href="#timeline" onclick="closeMenu()">Timeline</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contato</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Top 20% em uso de IA no iFood
+                </div>
+                <h1>
+                    Transformando dados em<br>
+                    <span class="highlight">solu&ccedil;&otilde;es de impacto</span>
+                </h1>
+                <p>
+                    Profissional de atua&ccedil;&atilde;o em &aacute;rea t&eacute;cnica na estrutura de neg&oacute;cios do iFood,
+                    especializado em qualidade de integra&ccedil;&atilde;o de cat&aacute;logo, observabilidade,
+                    automa&ccedil;&atilde;o com IA e constru&ccedil;&atilde;o de ferramentas que geram valor real
+                    para a opera&ccedil;&atilde;o.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                        Ver Projetos
+                    </a>
+                    <a href="https://www.linkedin.com/in/crystopher-marino-1b0b1b168/" target="_blank" class="btn btn-ghost">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// sobre mim</div>
+                <h2 class="section-title">Quem sou eu</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <p>
+                        Sou o Crystopher Marino, nascido e criado em Jundia&iacute;-SP. Atuo no iFood na &aacute;rea de
+                        qualidade de integra&ccedil;&atilde;o de cat&aacute;logo, onde desenvolvo solu&ccedil;&otilde;es que v&atilde;o desde
+                        ferramentas de configura&ccedil;&atilde;o massiva de lojas at&eacute; agents de IA para automa&ccedil;&atilde;o
+                        de an&aacute;lises complexas.
+                    </p>
+                    <p>
+                        Minha abordagem combina vis&atilde;o de neg&oacute;cio com expertise t&eacute;cnica &mdash; acredito
+                        que a melhor tecnologia &eacute; aquela que resolve problemas reais e escala junto
+                        com a opera&ccedil;&atilde;o. No &uacute;ltimo ciclo, participei de mais de 200 agendas entre
+                        parceiros, times t&eacute;cnicos e stakeholders internos.
+                    </p>
+                    <p>
+                        Al&eacute;m do iFood, desenvolvi um projeto de e-commerce para uma confeitaria
+                        como exerc&iacute;cio pr&aacute;tico para testar e aprofundar meus conhecimentos em
+                        desenvolvimento web. Nas horas vagas, sou cin&eacute;filo assumido, gamer de
+                        FPS e aventuras, e tutor de uma coelha chamada Pen&eacute;lope &mdash; a mais
+                        mimada e brava que voc&ecirc; j&aacute; viu.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">14</div>
+                            <div class="stat-label">Agents criados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1.8k+</div>
+                            <div class="stat-label">Intera&ccedil;&otilde;es com IA</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Agendas no ciclo</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">Top 20%</div>
+                            <div class="stat-label">Uso de IA iFood</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="about-info-card fade-up">
+                        <div class="info-row">
+                            <span class="info-label">Nome</span>
+                            <span class="info-value">Crystopher Marino</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Empresa</span>
+                            <span class="info-value">iFood</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Foco</span>
+                            <span class="info-value">Integra&ccedil;&atilde;o &amp; Qualidade</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Localiza&ccedil;&atilde;o</span>
+                            <span class="info-value">Jundia&iacute;, SP &mdash; Brasil</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Side Project</span>
+                            <span class="info-value">Site Confeitaria (estudo)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Sonho</span>
+                            <span class="info-value">Estudar fora do pa&iacute;s</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Pet</span>
+                            <span class="info-value">Pen&eacute;lope (coelha)</span>
+                        </div>
+                    </div>
+                    <div class="recognition-banner fade-up">
+                        <div class="recognition-icon">&#127942;</div>
+                        <div class="recognition-text">
+                            <strong>Cultura na Pr&aacute;tica &mdash; Ambidestria &amp; Priorize 80/20</strong><br>
+                            Reconhecimento por indicar solu&ccedil;&otilde;es inovadoras com o iFast, contribuindo
+                            para a funcionalidade nativa de configura&ccedil;&atilde;o massiva no Backoffice do iFood.
+                            <br><a href="https://ifood.slack.com/archives/CR7HBV79P/p1727115913058439" target="_blank" style="color:var(--accent); font-weight:600; font-size:0.78rem;">Ver thread no Slack &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// habilidades</div>
+                <h2 class="section-title">Stack &amp; Compet&ecirc;ncias</h2>
+                <p class="section-subtitle">Ferramentas e tecnologias que utilizo no dia a dia para entregar solu&ccedil;&otilde;es.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card fade-up" style="--skill-color: var(--blue); --skill-bg: rgba(59,130,246,0.1);">
+                    <div class="skill-icon" style="color: var(--blue);">&#9881;</div>
+                    <div class="skill-name">Engenharia de Dados</div>
+                    <div class="skill-desc">Databricks, Airflow (DAGs), Spark, notebooks, pipelines ETL/ELT e processamento em larga escala</div>
+                </div>
+                <div class="skill-card fade-up" style="--skill-color: var(--green); --skill-bg: rgba(34,197,94,0.1);">
+                    <div class="skill-icon" style="color: var(--green);">&#128202;</div>
+                    <div class="skill-name">Dashboards &amp; Analytics</div>
+                    <div class="skill-desc">Databricks Dashboards, monitoramento de KPIs, m&eacute;tricas de integra&ccedil;&atilde;o e vis&otilde;es operacionais</div>
+                </div>
+                <div class="skill-card fade-up" style="--skill-color: var(--purple); --skill-bg: rgba(168,85,247,0.1);">
+                    <div class="skill-icon" style="color: var(--purple);">&#129302;</div>
+                    <div class="skill-name">AI &amp; Agents</div>
+                    <div class="skill-desc">LLMs, Toqan, arquitetura MultiAgent, RAG, Genie Text2SQL, webhooks e automa&ccedil;&atilde;o com IA</div>
+                </div>
+                <div class="skill-card fade-up" style="--skill-color: var(--orange); --skill-bg: rgba(249,115,22,0.1);">
+                    <div class="skill-icon" style="color: var(--orange);">&#128680;</div>
+                    <div class="skill-name">Observabilidade</div>
+                    <div class="skill-desc">Alarm&iacute;stica automatizada (CHUCK), monitoramento de integra&ccedil;&otilde;es, detec&ccedil;&atilde;o proativa de falhas</div>
+                </div>
+                <div class="skill-card fade-up" style="--skill-color: var(--cyan); --skill-bg: rgba(6,182,212,0.1);">
+                    <div class="skill-icon" style="color: var(--cyan);">&#128187;</div>
+                    <div class="skill-name">Desenvolvimento</div>
+                    <div class="skill-desc">JavaScript, Node.js, Python, SQL, APIs REST, HTML5, CSS3, Bootstrap, integra&ccedil;&otilde;es de sistemas</div>
+                </div>
+                <div class="skill-card fade-up" style="--skill-color: var(--accent); --skill-bg: var(--accent-soft);">
+                    <div class="skill-icon" style="color: var(--accent);">&#127760;</div>
+                    <div class="skill-name">Integra&ccedil;&otilde;es &amp; APIs</div>
+                    <div class="skill-desc">Merchant API, autentica&ccedil;&atilde;o JWT, cat&aacute;logo, pedidos, picking, events e documenta&ccedil;&atilde;o t&eacute;cnica</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// projetos</div>
+                <h2 class="section-title">Entregas de Impacto</h2>
+                <p class="section-subtitle">Principais projetos entregues nos &uacute;ltimos ciclos no iFood e al&eacute;m.</p>
+            </div>
+            <div class="projects-list">
+
+                <!-- iFast -->
+                <div class="project-card fade-up" style="--project-color: var(--accent);">
+                    <div class="project-top">
+                        <div>
+                            <div class="project-title">iFast</div>
+                            <div class="project-subtitle">Configura&ccedil;&atilde;o massiva de lojas para rollout de grandes redes</div>
+                        </div>
+                        <span class="project-rank">TOP 1</span>
+                    </div>
+                    <div class="project-desc">
+                        Ferramenta web com autentica&ccedil;&atilde;o FoodLover via JWT Token, desenvolvida para
+                        disparar configura&ccedil;&otilde;es de forma massiva para todas as lojas de um mesmo grupo
+                        comercial durante o rollout. Antes do iFast, era necess&aacute;rio configurar cerca de
+                        7 telas por loja no BKO &mdash; em um rollout de 30 lojas, isso significava 210
+                        configura&ccedil;&otilde;es manuais. O iFast eliminou essa opera&ccedil;&atilde;o unit&aacute;ria, trazendo
+                        produtividade e escala para a ativa&ccedil;&atilde;o de parceiros como GPA, Carrefour,
+                        DPSP, RD e Nissei. A solu&ccedil;&atilde;o configurava par&acirc;metros como capacidade,
+                        tempo de preparo, hor&aacute;rios de funcionamento, pausa programada, entre outros.
+                        Ap&oacute;s compartilhar o c&oacute;digo-fonte com o time de Produto, a funcionalidade
+                        foi incorporada nativamente ao Backoffice, permitindo hoje a configura&ccedil;&atilde;o
+                        de at&eacute; 3 mil lojas de uma vez.
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">JWT Auth</span>
+                        <span class="tag">REST API</span>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-item">
+                            <span class="impact-value">210 &rarr; 1</span>
+                            <span class="impact-label">Config. por rollout</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value">3.000</span>
+                            <span class="impact-label">Lojas por disparo</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value">Nativo</span>
+                            <span class="impact-label">Incorporado ao BKO</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://docs.google.com/presentation/d/1ovq0XfGU5-HzKTkM1vu59rVWc9xHZWKGUHV20qvq8dM/edit?usp=sharing" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Apresenta&ccedil;&atilde;o iFast
+                        </a>
+                        <a href="https://ifood.slack.com/archives/C062QMLEW03/p1739459329481019" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                            Thread de lan&ccedil;amento
+                        </a>
+                        <a href="https://ifood.slack.com/archives/CR25T06UX/p1739457888863479" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                            Lan&ccedil;amento no BKO
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CHUCK -->
+                <div class="project-card fade-up" style="--project-color: var(--orange);">
+                    <div class="project-top">
+                        <div>
+                            <div class="project-title">CHUCK &mdash; Alarm&iacute;stica de Integra&ccedil;&atilde;o</div>
+                            <div class="project-subtitle">Monitoramento proativo da sa&uacute;de de integra&ccedil;&atilde;o de cat&aacute;logo via Slack</div>
+                        </div>
+                        <span class="project-rank" style="color:var(--orange); background:rgba(249,115,22,0.08); border-color:rgba(249,115,22,0.15);">TOP 2</span>
+                    </div>
+                    <div class="project-desc">
+                        App do Slack conectado a um notebook Databricks, que dispara alarm&iacute;stica autom&aacute;tica
+                        para at&eacute; 57 grupos de parceiros organizados em 3 grupos (A, B e C), com 3 disparos
+                        di&aacute;rios por grupo em hor&aacute;rios alternados. O job, orquestrado por Airflow via DAG,
+                        analisa as integra&ccedil;&otilde;es de produtos de cada loja para validar se houve atualiza&ccedil;&atilde;o
+                        de cat&aacute;logo no dia. O sistema classifica o status de cada grupo comercial como
+                        CR&Iacute;TICO (&lt;90% de lojas integradas), ATEN&Ccedil;&Atilde;O (&lt;95%) ou AVISO (&lt;99%),
+                        notificando automaticamente os stakeholders de PS e Comercial. Inclui bot&otilde;es
+                        para acesso a dashboards e ao Agent de integra&ccedil;&atilde;o de cat&aacute;logo, acelerando
+                        acionamentos e reduzindo impacto em GMV, cancelamentos e rupturas.
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Databricks</span>
+                        <span class="tag">Airflow/DAG</span>
+                        <span class="tag">Slack Bot</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Alarm&iacute;stica</span>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">57</span>
+                            <span class="impact-label">Grupos monitorados</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">9x/dia</span>
+                            <span class="impact-label">Disparos totais</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">Autom&aacute;tico</span>
+                            <span class="impact-label">Sem extra&ccedil;&atilde;o manual</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://docs.google.com/presentation/d/19zwLHFOj0mi_Szm4OX9H-talFNROUBIrYj7W0vsromw/edit?usp=sharing" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Apresenta&ccedil;&atilde;o CHUCK
+                        </a>
+                        <a href="https://ifood-prod-main.cloud.databricks.com/editor/notebooks/1627681520288636?o=2130186576916059" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            Notebook Databricks
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dashboards -->
+                <div class="project-card fade-up" style="--project-color: var(--green);">
+                    <div class="project-top">
+                        <div>
+                            <div class="project-title">Dashboards Databricks</div>
+                            <div class="project-subtitle">Pain&eacute;is para monitoramento di&aacute;rio de integra&ccedil;&atilde;o e opera&ccedil;&atilde;o</div>
+                        </div>
+                        <span class="project-rank" style="color:var(--green); background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.15);">TOP 3</span>
+                    </div>
+                    <div class="project-desc">
+                        Conjunto de dashboards constru&iacute;dos no Databricks para dar visibilidade &agrave; opera&ccedil;&atilde;o e ao neg&oacute;cio
+                        sobre a sa&uacute;de das integra&ccedil;&otilde;es de parceiros. Cada painel resolve uma necessidade
+                        espec&iacute;fica, transformando dados complexos em vis&otilde;es acess&iacute;veis que fundamentam
+                        acionamentos junto aos parceiros e orientam decis&otilde;es estrat&eacute;gicas.
+                    </div>
+                    <div class="dash-grid" style="margin: 1.2rem 0;">
+                        <div class="dash-card">
+                            <div class="dash-title">Requisi&ccedil;&otilde;es na API por Tipo</div>
+                            <div class="dash-desc">Rastreia requests dos parceiros nos endpoints do iFood (produtos e pedidos), exibindo c&oacute;digos de retorno, URLs e endpoints utilizados com dados D-1. Identifica mal uso e ader&ecirc;ncia &agrave;s boas pr&aacute;ticas.</div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-title">Status de Separa&ccedil;&atilde;o de Pedidos</div>
+                            <div class="dash-desc">Analisa os status de separa&ccedil;&atilde;o para parceiros com picking pr&oacute;prio, validando se o fluxo operacional de in&iacute;cio e fim da separa&ccedil;&atilde;o est&aacute; sendo executado corretamente via API.</div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-title">Qualidade do DELTA de Cargas</div>
+                            <div class="dash-desc">Mede a porcentagem de aproveitamento vs. descarte dos dados enviados pelo parceiro na integra&ccedil;&atilde;o de produtos. Fundamenta argumentos t&eacute;cnicos junto aos parceiros para otimiza&ccedil;&atilde;o.</div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-title">Frequ&ecirc;ncia de Integra&ccedil;&atilde;o</div>
+                            <div class="dash-desc">Calcula a m&eacute;dia de intervalo entre envios de dados de produto por grupo. Uma frequ&ecirc;ncia saud&aacute;vel &eacute; de no m&aacute;ximo 30 minutos entre integra&ccedil;&otilde;es.</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Databricks</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">KPIs</span>
+                        <span class="tag">Data Viz</span>
+                        <span class="tag">Integra&ccedil;&atilde;o</span>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--green);">4</span>
+                            <span class="impact-label">Pain&eacute;is ativos</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--green);">Di&aacute;rio</span>
+                            <span class="impact-label">Monitoramento</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--green);">Data-driven</span>
+                            <span class="impact-label">Decis&otilde;es</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://ifood-prod-main.cloud.databricks.com/dashboardsv3/01f072f60ee51ea78caafb0049bf9456/published?o=2130186576916059" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                            Acessar Dashboards
+                        </a>
+                    </div>
+                </div>
+
+                <!-- MultiAgents -->
+                <div class="project-card fade-up" style="--project-color: var(--purple);">
+                    <div class="project-top">
+                        <div>
+                            <div class="project-title">AI Agents &amp; Arquitetura MultiAgent</div>
+                            <div class="project-subtitle">Automa&ccedil;&atilde;o inteligente para an&aacute;lise de dados e opera&ccedil;&otilde;es</div>
+                        </div>
+                        <span class="project-rank" style="color:var(--purple); background:rgba(168,85,247,0.08); border-color:rgba(168,85,247,0.15);">TOP 4</span>
+                    </div>
+                    <div class="project-desc">
+                        Desenvolvimento de 14 agents de IA ao longo dos ciclos MB1 e MB2 do FY26 e MB1 do FY27,
+                        conectando notebooks do Databricks e chamadas via webhook/API para processar dados
+                        massivos e retornar an&aacute;lises em linguagem natural. Os agents foram projetados para
+                        facilitar o dia a dia dos times de opera&ccedil;&otilde;es e comercial, permitindo identificar
+                        problemas de integra&ccedil;&atilde;o rapidamente, gerar relat&oacute;rios t&eacute;cnicos e monitorar
+                        migra&ccedil;&otilde;es de API &mdash; tudo sem necessidade de conhecimento t&eacute;cnico profundo.
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Toqan</span>
+                        <span class="tag">MultiAgent</span>
+                        <span class="tag">Webhooks</span>
+                        <span class="tag">Genie Text2SQL</span>
+                        <span class="tag">Databricks</span>
+                        <span class="tag">RAG</span>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--purple);">14</span>
+                            <span class="impact-label">Agents criados</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--purple);">1.806</span>
+                            <span class="impact-label">Intera&ccedil;&otilde;es Toqan</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--purple);">Top 20%</span>
+                            <span class="impact-label">Uso de IA iFood</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/posts/crystopher-marino-1b0b1b168_inteligenciaartificial-ia-inovacao-share-7444820658087165952-5nRM?utm_source=share&utm_medium=member_desktop&rcm=ACoAACgIYFQBkEDkanR9IBaDCVI13CTuLOmCFwY" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Retrospectiva IA &mdash; Top 20%
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Confeitaria -->
+                <div class="project-card fade-up" style="--project-color: var(--cyan);">
+                    <div class="project-top">
+                        <div>
+                            <div class="project-title">Site de Confeitaria</div>
+                            <div class="project-subtitle">Projeto de estudo &mdash; E-commerce para bolos e doces sob encomenda</div>
+                        </div>
+                        <span class="project-rank" style="color:var(--cyan); background:rgba(6,182,212,0.08); border-color:rgba(6,182,212,0.15);">TOP 5</span>
+                    </div>
+                    <div class="project-desc">
+                        Projeto de estudo para colocar em pr&aacute;tica conhecimentos de desenvolvimento
+                        web. O site simula um e-commerce de confeitaria artesanal com cat&aacute;logo de
+                        produtos e sistema de encomendas. Desenvolvido 100% manualmente, sem aux&iacute;lio
+                        de IA ou reaproveitamento de c&oacute;digos de f&oacute;runs &mdash; o objetivo &eacute; validar e
+                        aprofundar o dom&iacute;nio das tecnologias na pr&aacute;tica. Projeto em constru&ccedil;&atilde;o,
+                        publicado em ambiente de teste no GitHub Pages.
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">GitHub Pages</span>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--cyan);">100%</span>
+                            <span class="impact-label">C&oacute;digo manual</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--cyan);">Online</span>
+                            <span class="impact-label">GitHub Pages</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--cyan);">Estudo</span>
+                            <span class="impact-label">Projeto pr&aacute;tico</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://chrismarino23.github.io/Projeto-HTML-/sobre.html" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                            Acessar o site
+                        </a>
+                        <a href="https://github.com/chrismarino23/Projeto-HTML-" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            Reposit&oacute;rio
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Agents -->
+    <section id="agents">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// ai agents</div>
+                <h2 class="section-title">Agents Desenvolvidos</h2>
+                <p class="section-subtitle">Agents de IA criados para automatizar an&aacute;lises, monitorar integra&ccedil;&otilde;es e simplificar o dia a dia dos times.</p>
+            </div>
+            <div class="agents-grid">
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">A.G.U.I.A</div>
+                        <span class="agent-badge public">P&uacute;blico</span>
+                    </div>
+                    <div class="agent-desc">
+                        Analist Guide of the Unified Integration Agent &mdash; assistente especializado
+                        em an&aacute;lise de integra&ccedil;&atilde;o e ingest&atilde;o de dados de produtos no ecossistema iFood.
+                        Consulta como os dados foram integrados, identifica diverg&ecirc;ncias e calcula
+                        a frequ&ecirc;ncia de integra&ccedil;&atilde;o por loja ou grupo.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Ingest&atilde;o de Produtos</span>
+                        <span class="agent-feature">Frequ&ecirc;ncia</span>
+                        <span class="agent-feature">Base de Conhecimento</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/48fb3361-44cf-4f8e-997c-eaf9c5f423bf" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">Qualyzinho</div>
+                        <span class="agent-badge public">P&uacute;blico</span>
+                    </div>
+                    <div class="agent-desc">
+                        Analisa a qualidade das integra&ccedil;&otilde;es de cat&aacute;logo avaliando frequ&ecirc;ncia de envio (P90)
+                        e qualidade das cargas DELTA. Gera relat&oacute;rios t&eacute;cnicos com diagn&oacute;stico,
+                        recomenda&ccedil;&otilde;es e pr&oacute;ximos passos priorizados por criticidade.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Qualidade DELTA</span>
+                        <span class="agent-feature">P90</span>
+                        <span class="agent-feature">Relat&oacute;rio T&eacute;cnico</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/ccd41820-d0ae-4991-be3c-77c8daefbb75" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">MigraBot 3000</div>
+                        <span class="agent-badge public">P&uacute;blico</span>
+                    </div>
+                    <div class="agent-desc">
+                        Especialista em migra&ccedil;&atilde;o de APIs do iFood Grocery (SMI &rarr; Merchant-API).
+                        Cruza dados de planilhas com Databricks para status de migra&ccedil;&atilde;o, share por grupo,
+                        an&aacute;lise de GMV, forecast vs realizado e alertas cr&iacute;ticos.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Migra&ccedil;&atilde;o API</span>
+                        <span class="agent-feature">GMV</span>
+                        <span class="agent-feature">Forecast</span>
+                        <span class="agent-feature">Slack Reports</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/d99d5754-26cd-4db2-83d7-b64c3ecd2c07" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">MigraBot DataFetcher</div>
+                        <span class="agent-badge public">P&uacute;blico</span>
+                    </div>
+                    <div class="agent-desc">
+                        Consulta dados do Databricks via Genie Text2SQL, verificando qual API cada loja
+                        utiliza (Legada vs Merchant-API), hist&oacute;rico de integra&ccedil;&otilde;es e cross-check
+                        entre dados de produtos e pedidos.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Genie Text2SQL</span>
+                        <span class="agent-feature">Databricks</span>
+                        <span class="agent-feature">Cross-check</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/a3dfe293-81f5-4542-8425-8ec1e1490512" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">Sr RSA</div>
+                        <span class="agent-badge public">P&uacute;blico</span>
+                    </div>
+                    <div class="agent-desc">
+                        Transforma discuss&otilde;es de reuni&otilde;es de RSA em relat&oacute;rios de status claros e
+                        concisos, com m&eacute;tricas de migra&ccedil;&atilde;o, avan&ccedil;os, decis&otilde;es e pr&oacute;ximos passos
+                        formatados de forma estruturada.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Relat&oacute;rios RSA</span>
+                        <span class="agent-feature">Migra&ccedil;&atilde;o</span>
+                        <span class="agent-feature">Action Items</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/9315dbe3-310f-4d6b-8aba-1ddb26a94d88" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">Formula Master</div>
+                        <span class="agent-badge personal">Pessoal</span>
+                    </div>
+                    <div class="agent-desc">
+                        Especialista em f&oacute;rmulas para Excel e Google Sheets. Cria, corrige e otimiza
+                        f&oacute;rmulas avan&ccedil;adas (PROCV, &Iacute;NDICE/CORRESP, SOMASES, FILTER, LAMBDA),
+                        aponta diferen&ccedil;as entre plataformas e demonstra com exemplos pr&aacute;ticos.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">Excel</span>
+                        <span class="agent-feature">Google Sheets</span>
+                        <span class="agent-feature">F&oacute;rmulas Avan&ccedil;adas</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/ec1002ef-6fc2-461c-86bd-92f9975a80e4" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+                <div class="agent-card fade-up">
+                    <div class="agent-header">
+                        <div class="agent-name">Data Sage-DB</div>
+                        <span class="agent-badge personal">Pessoal</span>
+                    </div>
+                    <div class="agent-desc">
+                        Especialista em queries SQL e Databricks, an&aacute;lise de dados, visualiza&ccedil;&otilde;es e
+                        m&eacute;tricas de e-commerce. Otimiza CTEs, fun&ccedil;&otilde;es de janela e sugere boas
+                        pr&aacute;ticas de performance com particionamento e Z-ordering.
+                    </div>
+                    <div class="agent-features">
+                        <span class="agent-feature">SQL</span>
+                        <span class="agent-feature">Databricks</span>
+                        <span class="agent-feature">E-commerce</span>
+                        <span class="agent-feature">Charts</span>
+                    </div>
+                    <a href="https://work.toqan.ai/spaces/join/4d6da886-35cc-421b-b5e1-9ec8eb99dd34" target="_blank" class="agent-link">
+                        Acessar Agent &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// trajet&oacute;ria</div>
+                <h2 class="section-title">Timeline</h2>
+                <p class="section-subtitle">Marcos e entregas ao longo dos &uacute;ltimos ciclos no iFood.</p>
+            </div>
+            <div class="timeline fade-up">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MB1 FY27 &mdash; Ciclo Atual (a partir de abr/2026)</div>
+                    <div class="timeline-title">AI Agents, CHUCK &amp; Dashboards &mdash; Evolu&ccedil;&atilde;o cont&iacute;nua</div>
+                    <div class="timeline-desc">Continuidade no desenvolvimento de agents de IA e manuten&ccedil;&atilde;o ativa da alarm&iacute;stica CHUCK e dos dashboards operacionais, garantindo a evolu&ccedil;&atilde;o e confiabilidade das ferramentas em produ&ccedil;&atilde;o.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MB1 FY27 &mdash; Ciclo Atual</div>
+                    <div class="timeline-title">Qualidade de Integra&ccedil;&atilde;o &amp; Migra&ccedil;&atilde;o legada (ServicesAPI) &rarr; Merchant-API</div>
+                    <div class="timeline-desc">Continuidade do trabalho de qualidade de integra&ccedil;&atilde;o de cat&aacute;logo com foco na migra&ccedil;&atilde;o da ServicesAPI para a Merchant-API dos parceiros restantes.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MB2 FY26 (out/2025 &ndash; mar/2026)</div>
+                    <div class="timeline-title">Qualidade de Integra&ccedil;&atilde;o &amp; Migra&ccedil;&atilde;o legada (SMI e ServicesAPI) &rarr; Merchant-API</div>
+                    <div class="timeline-desc">Meta painel de qualidade de integra&ccedil;&atilde;o de cat&aacute;logo dos grandes parceiros. Mais de 200 agendas com times tech, valida&ccedil;&atilde;o de deploys e conclus&atilde;o da migra&ccedil;&atilde;o do SMI (custo de +US$ 200k/m&ecirc;s), zerando as lojas na integra&ccedil;&atilde;o legada.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MB2 FY26 &amp; MB1 FY27</div>
+                    <div class="timeline-title">AI Agents &amp; Arquitetura MultiAgent</div>
+                    <div class="timeline-desc">Cria&ccedil;&atilde;o de 14 agents de IA com 1.806 intera&ccedil;&otilde;es no Toqan. Reconhecido entre os Top 20% que mais utilizam IA no iFood. Trilhas de carreira em IA e aplica&ccedil;&atilde;o pr&aacute;tica com agents para neg&oacute;cio.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MB2 FY26 &amp; MB1 FY27</div>
+                    <div class="timeline-title">CHUCK &amp; Dashboards Operacionais</div>
+                    <div class="timeline-desc">Constru&ccedil;&atilde;o da alarm&iacute;stica de integra&ccedil;&atilde;o CHUCK e dos 4 pain&eacute;is de monitoramento no Databricks, com manuten&ccedil;&otilde;es ativas no ciclo atual.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Projeto Estrat&eacute;gico</div>
+                    <div class="timeline-title">iFast &mdash; Configura&ccedil;&atilde;o Massiva</div>
+                    <div class="timeline-desc">Desenvolvimento do iFast para configura&ccedil;&atilde;o massiva de lojas. C&oacute;digo-fonte compartilhado com o time de Produto, resultando na funcionalidade nativa no Backoffice. Reconhecimento de Cultura na Pr&aacute;tica.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Side Project</div>
+                    <div class="timeline-title">Site de Confeitaria &mdash; Projeto de Estudo</div>
+                    <div class="timeline-desc">Desenvolvimento manual de site para confeitaria artesanal como exerc&iacute;cio pr&aacute;tico de programa&ccedil;&atilde;o web, publicado no GitHub Pages.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container contact-section">
+            <div class="section-header fade-up" style="margin-left:auto;margin-right:auto;text-align:center;">
+                <div class="section-label">// contato</div>
+                <h2 class="section-title">Vamos conversar?</h2>
+                <p class="section-subtitle" style="margin:0 auto;">Estou sempre aberto a trocar ideias sobre tecnologia, dados, IA e novos desafios.</p>
+            </div>
+            <div class="contact-links fade-up">
+                <a href="https://github.com/chrismarino23" target="_blank" class="contact-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/crystopher-marino-1b0b1b168/" target="_blank" class="contact-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="mailto:crystopher.marino@ifood.com.br" class="contact-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    E-mail
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Crystopher Marino &mdash; Feito com <span>&hearts;</span> e muito c&oacute;digo</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), index * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.querySelectorAll('.glow-orb').forEach((orb, i) => {
+                const speed = (i + 1) * 15;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
