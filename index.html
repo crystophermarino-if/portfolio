@@ -597,6 +597,46 @@
             height: 14px;
         }
 
+        /* ===== STATUS INDICATORS ===== */
+        .status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0.8rem 0 0.4rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.critical { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.4); }
+        .status-dot.warning { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.4); }
+        .status-dot.notice { background: #3b82f6; box-shadow: 0 0 8px rgba(59,130,246,0.4); }
+
+        .status-label {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .status-label.critical { background: rgba(239,68,68,0.12); color: #ef4444; }
+        .status-label.warning { background: rgba(245,158,11,0.12); color: #f59e0b; }
+        .status-label.notice { background: rgba(59,130,246,0.12); color: #3b82f6; }
+
         /* ===== AGENTS SECTION ===== */
         .agents-grid {
             display: grid;
@@ -833,6 +873,134 @@
 
         footer span { color: var(--accent); }
 
+        /* ===== FORMAÇÃO & CERTIFICADOS ===== */
+        .formacao-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .formacao-principal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formacao-principal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+        }
+
+        .formacao-titulo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .formacao-instituicao {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .formacao-detalhe {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .certificados-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.4rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-card:hover {
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+            background: var(--bg-card-hover);
+        }
+
+        .cert-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .cert-info { flex: 1; }
+
+        .cert-nome {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .cert-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .cert-meta span {
+            margin-right: 0.8rem;
+        }
+
+        .formacao-cta {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .formacao-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--border-hover);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .formacao-cta a:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .formacao-cta a svg {
+            width: 16px;
+            height: 16px;
+        }
+
         /* ===== ANIMATIONS ===== */
         .fade-up {
             opacity: 0;
@@ -868,6 +1036,7 @@
             .skills-grid { grid-template-columns: 1fr 1fr; }
             .agents-grid { grid-template-columns: 1fr; }
             .dash-grid { grid-template-columns: 1fr; }
+            .formacao-grid { grid-template-columns: 1fr; }
             .section-title { font-size: 1.7rem; }
             .hero h1 { font-size: 2.2rem; }
             .project-top { flex-direction: column-reverse; gap: 0.5rem; }
@@ -897,6 +1066,7 @@
             <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
             <li><a href="#projects" onclick="closeMenu()">Projetos</a></li>
             <li><a href="#agents" onclick="closeMenu()">AI Agents</a></li>
+            <li><a href="#formacao" onclick="closeMenu()">Forma&ccedil;&atilde;o</a></li>
             <li><a href="#timeline" onclick="closeMenu()">Timeline</a></li>
             <li><a href="#contact" onclick="closeMenu()">Contato</a></li>
         </ul>
@@ -947,23 +1117,41 @@
             <div class="about-grid">
                 <div class="about-text fade-up">
                     <p>
-                        Sou o Crystopher Marino, nascido e criado em Jundia&iacute;-SP. Atuo no iFood na &aacute;rea de
-                        qualidade de integra&ccedil;&atilde;o de cat&aacute;logo, onde desenvolvo solu&ccedil;&otilde;es que v&atilde;o desde
-                        ferramentas de configura&ccedil;&atilde;o massiva de lojas at&eacute; agents de IA para automa&ccedil;&atilde;o
-                        de an&aacute;lises complexas.
+                        Sou o Crystopher Marino, tenho <strong id="idade"></strong>, nascido e criado
+                        em Jundia&iacute;-SP. Casado h&aacute; <strong id="tempo-casado"></strong>,
+                        mas eu e minha c&ocirc;njuge estamos juntos h&aacute;
+                        <strong id="tempo-juntos"></strong>. Entrei no iFood em
+                        05/06/2023 e tenho <strong id="tempo-casa"></strong> de casa. Atuo na estrutura de
+                        Opera&ccedil;&otilde;es Verticais | BU MKTP, na &aacute;rea de Integra&ccedil;&atilde;o, Cadastro e Fin | BU MKTP,
+                        com foco em qualidade de integra&ccedil;&atilde;o de cat&aacute;logo.
                     </p>
                     <p>
-                        Minha abordagem combina vis&atilde;o de neg&oacute;cio com expertise t&eacute;cnica &mdash; acredito
-                        que a melhor tecnologia &eacute; aquela que resolve problemas reais e escala junto
-                        com a opera&ccedil;&atilde;o. No &uacute;ltimo ciclo, participei de mais de 200 agendas entre
-                        parceiros, times t&eacute;cnicos e stakeholders internos.
+                        Iniciei na &aacute;rea de Implanta&ccedil;&atilde;o de novas lojas em Groceries Marketplace, atuando
+                        na opera&ccedil;&atilde;o e neg&oacute;cios. Ap&oacute;s cerca de 1 ano, migrei para uma frente mais t&eacute;cnica
+                        dentro de Ops, onde conduzia homologa&ccedil;&otilde;es dos m&oacute;dulos da Merchant-API para
+                        parceiros com desenvolvimento pr&oacute;prio ou integradoras contratadas. Nessa fase,
+                        validava crit&eacute;rios de homologa&ccedil;&atilde;o conforme documenta&ccedil;&atilde;o, acompanhava testes
+                        em ambiente de teste e apoiava na conex&atilde;o com stakeholders internos. Tamb&eacute;m
+                        mantinha e atualizava a documenta&ccedil;&atilde;o do Developer Groceries, editando o c&oacute;digo
+                        Markdown no reposit&oacute;rio Git e solicitando MRs ao time revisor. Essa atua&ccedil;&atilde;o cobria
+                        as verticais de mercado, atacado, farma, pet e shopping, tanto B2B quanto B2C,
+                        al&eacute;m de darkstore. Ap&oacute;s cerca de 6 meses nessa frente, migrei para o time atual
+                        de Qualidade da Integra&ccedil;&atilde;o.
                     </p>
                     <p>
-                        Al&eacute;m do iFood, desenvolvi um projeto de e-commerce para uma confeitaria
-                        como exerc&iacute;cio pr&aacute;tico para testar e aprofundar meus conhecimentos em
-                        desenvolvimento web. Nas horas vagas, sou cin&eacute;filo assumido, gamer de
-                        FPS e aventuras, e tutor de uma coelha chamada Pen&eacute;lope &mdash; a mais
-                        mimada e brava que voc&ecirc; j&aacute; viu.
+                        Ao longo dessa trajet&oacute;ria, j&aacute; passei por <strong>3 times diferentes</strong>
+                        com <strong>3 coordenadores distintos</strong>, sempre me adaptando rapidamente
+                        a novos contextos, processos e desafios. Essa flexibilidade e facilidade de
+                        aprendizado me permitiram manter consist&ecirc;ncia nos resultados &mdash; em todas
+                        as avalia&ccedil;&otilde;es de desempenho (AvD), nunca tive resultado abaixo de
+                        <strong>&ldquo;Brilhou na entrega&rdquo;</strong>.
+                    </p>
+                    <p>
+                        No &uacute;ltimo ciclo, participei de mais de 200 agendas com parceiros, times t&eacute;cnicos
+                        e stakeholders internos. Al&eacute;m do iFood, desenvolvi um projeto de e-commerce
+                        para uma confeitaria como exerc&iacute;cio pr&aacute;tico de programa&ccedil;&atilde;o web. Nas horas vagas,
+                        sou cin&eacute;filo assumido, gamer de FPS e aventuras, e tutor de uma coelha
+                        chamada Pen&eacute;lope &mdash; a mais mimada e brava que voc&ecirc; j&aacute; viu.
                     </p>
                     <div class="about-stats">
                         <div class="stat-card">
@@ -995,8 +1183,8 @@
                             <span class="info-value">iFood</span>
                         </div>
                         <div class="info-row">
-                            <span class="info-label">Foco</span>
-                            <span class="info-value">Integra&ccedil;&atilde;o &amp; Qualidade</span>
+                            <span class="info-label">&Aacute;rea</span>
+                            <span class="info-value">Integra&ccedil;&atilde;o, Cadastro e Fin</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Localiza&ccedil;&atilde;o</span>
@@ -1040,8 +1228,8 @@
             <div class="skills-grid">
                 <div class="skill-card fade-up" style="--skill-color: var(--blue); --skill-bg: rgba(59,130,246,0.1);">
                     <div class="skill-icon" style="color: var(--blue);">&#9881;</div>
-                    <div class="skill-name">Engenharia de Dados</div>
-                    <div class="skill-desc">Databricks, Airflow (DAGs), Spark, notebooks, pipelines ETL/ELT e processamento em larga escala</div>
+                    <div class="skill-name">Dados &amp; Automa&ccedil;&atilde;o</div>
+                    <div class="skill-desc">Databricks (notebooks, dashboards, SQL), Airflow (DAGs), orquestra&ccedil;&atilde;o de jobs e an&aacute;lise de dados</div>
                 </div>
                 <div class="skill-card fade-up" style="--skill-color: var(--green); --skill-bg: rgba(34,197,94,0.1);">
                     <div class="skill-icon" style="color: var(--green);">&#128202;</div>
@@ -1097,8 +1285,10 @@
                         comercial durante o rollout. Antes do iFast, era necess&aacute;rio configurar cerca de
                         7 telas por loja no BKO &mdash; em um rollout de 30 lojas, isso significava 210
                         configura&ccedil;&otilde;es manuais. O iFast eliminou essa opera&ccedil;&atilde;o unit&aacute;ria, trazendo
-                        produtividade e escala para a ativa&ccedil;&atilde;o de parceiros como GPA, Carrefour,
-                        DPSP, RD e Nissei. A solu&ccedil;&atilde;o configurava par&acirc;metros como capacidade,
+                        produtividade e escala para a ativa&ccedil;&atilde;o de parceiros como Assa&iacute;, Carrefour,
+                        Atacad&atilde;o, GPA, Raia Drogasil, Drogaria Pacheco e S&atilde;o Paulo (DPSP), Nissei
+                        e diversos outros de multicategorias (mercado, atacado, farma, pet e shopping).
+                        A solu&ccedil;&atilde;o configurava par&acirc;metros como capacidade,
                         tempo de preparo, hor&aacute;rios de funcionamento, pausa programada, entre outros.
                         Ap&oacute;s compartilhar o c&oacute;digo-fonte com o time de Produto, a funcionalidade
                         foi incorporada nativamente ao Backoffice, permitindo hoje a configura&ccedil;&atilde;o
@@ -1124,6 +1314,14 @@
                         <div class="impact-item">
                             <span class="impact-value">Nativo</span>
                             <span class="impact-label">Incorporado ao BKO</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value">+1.200%</span>
+                            <span class="impact-label">Produtividade</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value">93%</span>
+                            <span class="impact-label">Mais r&aacute;pido</span>
                         </div>
                     </div>
                     <div class="project-links">
@@ -1153,14 +1351,33 @@
                     </div>
                     <div class="project-desc">
                         App do Slack conectado a um notebook Databricks, que dispara alarm&iacute;stica autom&aacute;tica
-                        para at&eacute; 57 grupos de parceiros organizados em 3 grupos (A, B e C), com 3 disparos
+                        para at&eacute; 55 grupos de parceiros organizados em 3 grupos (A, B e C), com 3 disparos
                         di&aacute;rios por grupo em hor&aacute;rios alternados. O job, orquestrado por Airflow via DAG,
                         analisa as integra&ccedil;&otilde;es de produtos de cada loja para validar se houve atualiza&ccedil;&atilde;o
-                        de cat&aacute;logo no dia. O sistema classifica o status de cada grupo comercial como
-                        CR&Iacute;TICO (&lt;90% de lojas integradas), ATEN&Ccedil;&Atilde;O (&lt;95%) ou AVISO (&lt;99%),
-                        notificando automaticamente os stakeholders de PS e Comercial. Inclui bot&otilde;es
-                        para acesso a dashboards e ao Agent de integra&ccedil;&atilde;o de cat&aacute;logo, acelerando
-                        acionamentos e reduzindo impacto em GMV, cancelamentos e rupturas.
+                        de cat&aacute;logo no dia. O sistema classifica o status de cada grupo comercial:
+                    </div>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <span class="status-dot critical"></span>
+                            <span class="status-label critical">CR&Iacute;TICO</span>
+                            <span>&lt; 90% das lojas com integra&ccedil;&atilde;o no dia</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot warning"></span>
+                            <span class="status-label warning">ATEN&Ccedil;&Atilde;O</span>
+                            <span>Entre 90% e 95% das lojas integradas</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot notice"></span>
+                            <span class="status-label notice">AVISO</span>
+                            <span>Entre 96% e 99% das lojas integradas</span>
+                        </div>
+                    </div>
+                    <div class="project-desc" style="margin-top: 0.8rem;">
+                        Notifica automaticamente os stakeholders de PS e Comercial, com bot&otilde;es
+                        para acesso a dashboards e ao Agent de integra&ccedil;&atilde;o de cat&aacute;logo. Acelera
+                        acionamentos e reduz impacto em GMV, cancelamentos e rupturas.
+                        Canal padr&atilde;o no Slack: <strong>#chuck-alarmisticas-integracao</strong>.
                     </div>
                     <div class="project-tags">
                         <span class="tag">Databricks</span>
@@ -1172,7 +1389,7 @@
                     </div>
                     <div class="project-impact">
                         <div class="impact-item">
-                            <span class="impact-value" style="color:var(--orange);">57</span>
+                            <span class="impact-value" style="color:var(--orange);">55</span>
                             <span class="impact-label">Grupos monitorados</span>
                         </div>
                         <div class="impact-item">
@@ -1183,6 +1400,18 @@
                             <span class="impact-value" style="color:var(--orange);">Autom&aacute;tico</span>
                             <span class="impact-label">Sem extra&ccedil;&atilde;o manual</span>
                         </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">15.305</span>
+                            <span class="impact-label">Lojas monitoradas</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">74%</span>
+                            <span class="impact-label">Cobertura GMV Groceries</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--orange);">R$ 1,2 bi</span>
+                            <span class="impact-label">GMV monitorado no ciclo</span>
+                        </div>
                     </div>
                     <div class="project-links">
                         <a href="https://docs.google.com/presentation/d/19zwLHFOj0mi_Szm4OX9H-talFNROUBIrYj7W0vsromw/edit?usp=sharing" target="_blank" class="project-link">
@@ -1192,6 +1421,10 @@
                         <a href="https://ifood-prod-main.cloud.databricks.com/editor/notebooks/1627681520288636?o=2130186576916059" target="_blank" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                             Notebook Databricks
+                        </a>
+                        <a href="https://ifood.slack.com/archives/C09H281KY7M/p1778876173960249" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                            Exemplo de disparo
                         </a>
                     </div>
                 </div>
@@ -1207,9 +1440,10 @@
                     </div>
                     <div class="project-desc">
                         Conjunto de dashboards constru&iacute;dos no Databricks para dar visibilidade &agrave; opera&ccedil;&atilde;o e ao neg&oacute;cio
-                        sobre a sa&uacute;de das integra&ccedil;&otilde;es de parceiros. Cada painel resolve uma necessidade
-                        espec&iacute;fica, transformando dados complexos em vis&otilde;es acess&iacute;veis que fundamentam
-                        acionamentos junto aos parceiros e orientam decis&otilde;es estrat&eacute;gicas.
+                        sobre a sa&uacute;de das integra&ccedil;&otilde;es de parceiros. Os pain&eacute;is contemplam
+                        <strong>100% das verticais de Groceries multicategorias</strong> (mercado, atacado, farma, pet e shopping).
+                        Cada painel resolve uma necessidade espec&iacute;fica, transformando dados complexos em vis&otilde;es acess&iacute;veis
+                        que fundamentam acionamentos junto aos parceiros e orientam decis&otilde;es estrat&eacute;gicas.
                     </div>
                     <div class="dash-grid" style="margin: 1.2rem 0;">
                         <div class="dash-card">
@@ -1228,6 +1462,12 @@
                             <div class="dash-title">Frequ&ecirc;ncia de Integra&ccedil;&atilde;o</div>
                             <div class="dash-desc">Calcula a m&eacute;dia de intervalo entre envios de dados de produto por grupo. Uma frequ&ecirc;ncia saud&aacute;vel &eacute; de no m&aacute;ximo 30 minutos entre integra&ccedil;&otilde;es.</div>
                         </div>
+                        <div class="dash-card" style="grid-column: 1 / -1;">
+                            <div class="dash-title">Vis&atilde;o Unificada &mdash; Funil de Convers&atilde;o de Cargas</div>
+                            <div class="dash-desc">Dash para meta painel do ciclo MB1FY27, voltado para a vertical de <strong>Mercado + Atacado</strong>, que representa <strong>~90% do share de GMV</strong> dessas categorias. Exibe a porcentagem de aproveitamento de cargas, identificando parceiros que enviam dados massivos e calculando a % de aproveitamento para embasar contato com os times tech e solicitar corre&ccedil;&otilde;es alinhadas &agrave;s boas pr&aacute;ticas da documenta&ccedil;&atilde;o.
+                                <br><a href="https://ifood-prod-main.cloud.databricks.com/dashboardsv3/01f131e4d533173f89a71313cb1c02eb/published/pages/5ea7c0a7?f_5ea7c0a7%7Edaterange=now-7d%252Fd%7Enow%252Fd&o=2130186576916059" target="_blank" style="color:var(--green); font-weight:600; font-size:0.78rem; margin-top:0.4rem; display:inline-block;">Acessar dashboard &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-tags">
                         <span class="tag">Databricks</span>
@@ -1238,8 +1478,12 @@
                     </div>
                     <div class="project-impact">
                         <div class="impact-item">
-                            <span class="impact-value" style="color:var(--green);">4</span>
+                            <span class="impact-value" style="color:var(--green);">5</span>
                             <span class="impact-label">Pain&eacute;is ativos</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--green);">100%</span>
+                            <span class="impact-label">Groceries multicategorias</span>
                         </div>
                         <div class="impact-item">
                             <span class="impact-value" style="color:var(--green);">Di&aacute;rio</span>
@@ -1296,6 +1540,10 @@
                         <div class="impact-item">
                             <span class="impact-value" style="color:var(--purple);">Top 20%</span>
                             <span class="impact-label">Uso de IA iFood</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-value" style="color:var(--purple);">1&ordm;/14</span>
+                            <span class="impact-label">Agents ativos na estrutura</span>
                         </div>
                     </div>
                     <div class="project-links">
@@ -1518,6 +1766,126 @@
         </div>
     </section>
 
+    <!-- Formação & Certificados -->
+    <section id="formacao">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">// forma&ccedil;&atilde;o</div>
+                <h2 class="section-title">Forma&ccedil;&atilde;o &amp; Certificados</h2>
+                <p class="section-subtitle">Gradua&ccedil;&atilde;o, cursos e certificados que complementam minha atua&ccedil;&atilde;o profissional.</p>
+            </div>
+            <div class="formacao-grid">
+                <div>
+                    <div class="formacao-principal fade-up">
+                        <div style="font-size:1.4rem; margin-bottom:0.8rem;">&#127891;</div>
+                        <div class="formacao-titulo">Tecn&oacute;logo em An&aacute;lise e Desenvolvimento de Sistemas</div>
+                        <div class="formacao-instituicao">UNIP &mdash; Universidade Paulista</div>
+                        <div class="formacao-detalhe">
+                            Curso superior de tecnologia focado em desenvolvimento de software,
+                            banco de dados, engenharia de software e arquitetura de sistemas.
+                            <br><strong>Carga hor&aacute;ria:</strong> 2.520h (3 anos)
+                            <br><strong>Conclus&atilde;o:</strong> Abril/2020
+                        </div>
+                    </div>
+                    <div style="margin-top:1.2rem;">
+                        <div class="formacao-principal fade-up" style="padding:1.5rem 2rem;">
+                            <div class="formacao-titulo" style="font-size:0.95rem;">BADHU 2.0 &mdash; Programa de Dados iFood</div>
+                            <div class="formacao-instituicao" style="font-size:0.8rem;">iFood &mdash; Programa Interno</div>
+                            <div class="formacao-detalhe" style="margin-top:0.5rem;">
+                                Programa interno de capacita&ccedil;&atilde;o em dados com 3 m&oacute;dulos:
+                                <strong>Mentalidade Data-Driven</strong>, <strong>Ecossistema de Dados</strong> e <strong>SQL</strong>.
+                                Abordando cultura data-driven, arquitetura de dados (data lake, data warehouse) e SQL aplicado.
+                                <br><strong>Conclus&atilde;o:</strong> Setembro/2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificados-lista fade-up">
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(249,115,22,0.1); color:var(--orange);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">JavaScript</div>
+                            <div class="cert-meta">
+                                <span>Coderhouse</span>
+                                <span>42h &middot; 11 semanas</span>
+                                <span>Ago/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">HTML e CSS</div>
+                            <div class="cert-meta">
+                                <span>Coderhouse</span>
+                                <span>48h &middot; 12 semanas</span>
+                                <span>Jun/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(234,29,44,0.1); color:var(--accent);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">Introdu&ccedil;&atilde;o ao JavaScript</div>
+                            <div class="cert-meta">
+                                <span>Funda&ccedil;&atilde;o Bradesco</span>
+                                <span>20h</span>
+                                <span>Nov/2022</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(59,130,246,0.1); color:var(--blue);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">Crie um Site Simples usando HTML, CSS e JavaScript</div>
+                            <div class="cert-meta">
+                                <span>Funda&ccedil;&atilde;o Bradesco / Microsoft</span>
+                                <span>2h</span>
+                                <span>Out/2022</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(168,85,247,0.1); color:var(--purple);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">BADHU 2.0 &mdash; M&oacute;dulo I: Mentalidade Data-Driven</div>
+                            <div class="cert-meta">
+                                <span>iFood</span>
+                                <span>Set/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(168,85,247,0.1); color:var(--purple);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">BADHU 2.0 &mdash; M&oacute;dulo II: Ecossistema de Dados</div>
+                            <div class="cert-meta">
+                                <span>iFood</span>
+                                <span>Set/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon" style="background:rgba(168,85,247,0.1); color:var(--purple);">&#128218;</div>
+                        <div class="cert-info">
+                            <div class="cert-nome">BADHU 2.0 &mdash; M&oacute;dulo III: SQL</div>
+                            <div class="cert-meta">
+                                <span>iFood</span>
+                                <span>Set/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formacao-cta fade-up">
+                <a href="https://drive.google.com/drive/folders/1q4oa-ajmbApRIZNolXU64gSB-3qxtEla?usp=sharing" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Ver todos os certificados no Google Drive
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Timeline -->
     <section id="timeline">
         <div class="container">
@@ -1636,6 +2004,62 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+
+        // === C&aacute;lculos din&acirc;micos ===
+        (function() {
+            const hoje = new Date();
+
+            // Idade (nascimento: 23/08/1993)
+            const nascimento = new Date(1993, 7, 23);
+            let idade = hoje.getFullYear() - nascimento.getFullYear();
+            if (hoje.getMonth() < nascimento.getMonth() ||
+                (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+            const elIdade = document.getElementById('idade');
+            if (elIdade) elIdade.textContent = idade + ' anos';
+
+            // Tempo de casado (casamento: 23/06/2022)
+            const casamento = new Date(2022, 5, 23);
+            let anosCasado = hoje.getFullYear() - casamento.getFullYear();
+            if (hoje.getMonth() < casamento.getMonth() ||
+                (hoje.getMonth() === casamento.getMonth() && hoje.getDate() < casamento.getDate())) {
+                anosCasado--;
+            }
+            const elCasado = document.getElementById('tempo-casado');
+            if (elCasado) elCasado.textContent = anosCasado + (anosCasado === 1 ? ' ano' : ' anos');
+
+            // Tempo juntos (desde 2015)
+            const juntos = new Date(2015, 0, 1);
+            let anosJuntos = hoje.getFullYear() - juntos.getFullYear();
+            if (hoje.getMonth() < juntos.getMonth() ||
+                (hoje.getMonth() === juntos.getMonth() && hoje.getDate() < juntos.getDate())) {
+                anosJuntos--;
+            }
+            const elJuntos = document.getElementById('tempo-juntos');
+            if (elJuntos) elJuntos.textContent = anosJuntos + ' anos';
+
+            // Tempo de casa (entrada: 05/06/2023)
+            const inicio = new Date(2023, 5, 5);
+            let anos = hoje.getFullYear() - inicio.getFullYear();
+            let meses = hoje.getMonth() - inicio.getMonth();
+            let dias = hoje.getDate() - inicio.getDate();
+            if (dias < 0) {
+                meses--;
+                const mesAnterior = new Date(hoje.getFullYear(), hoje.getMonth(), 0);
+                dias += mesAnterior.getDate();
+            }
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+            let resultado = '';
+            if (anos > 0) resultado += anos + (anos === 1 ? ' ano' : ' anos');
+            if (meses > 0) resultado += (resultado ? ', ' : '') + meses + (meses === 1 ? ' m&ecirc;s' : ' meses');
+            if (dias > 0) resultado += (resultado ? ' e ' : '') + dias + (dias === 1 ? ' dia' : ' dias');
+            const el = document.getElementById('tempo-casa');
+            if (el) el.textContent = resultado;
+        })();
 
         window.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
